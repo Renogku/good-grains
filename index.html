@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+    
+    <!-- SEO meta tags -->
+    <title>Good Grains</title>
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template">
+    <meta name="keywords" content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, light and dark mode, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+
+    <!-- Webmanifest + Favicon / App icons -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="assets/app-icons/icon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/app-icons/icon-180x180.png">
+        
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
+
+    <!-- Import Google font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/simplebar/dist/simplebar.min.css">
+
+    <!-- Font icons -->
+    <link rel="stylesheet" href="assets/icons/around-icons.min.css">
+
+    <!-- Theme styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #121519;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #6f788b;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        background-color: #d7dde2; 
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        background-color: rgba(255,255,255,.25);
+      }
+      @-webkit-keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      @keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+
+      .h1-kanit{
+        font-family: "Kanit", sans-serif;
+        font-weight: 600;
+        font-size: 72px !important;
+        font-style: normal;
+      }
+
+      .h2-kanit{
+        font-family: "Kanit", sans-serif;
+        font-weight: 600;
+        font-size: 42px !important;
+        font-style: normal;
+      }
+    </style>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading')
+          preloader.classList.remove('active')
+          setTimeout(function () {
+            preloader.remove()
+          }, 1500)
+        }
+      })()
+    </script>
+  </head>
+
+
+  <!-- Body -->
+  <body>
+
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+
+
+    <!-- Cart offcanvas (empty state) -->
+    <div class="offcanvas offcanvas-end py-2 p-sm-4 p-md-5" id="cartOffcanvas" style="width: 680px;">
+
+      <!-- Title -->
+      <div class="px-4 pt-3">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 pb-sm-4">
+          <h2 class="offcanvas-title d-flex align-items-center mb-1">
+            <svg class="text-body-secondary fs-1 me-3" width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m20 17.25h-11.57l-.19-1.58 12.11-.95c.82-.07 1.49-.7 1.6-1.52l.14-1.1c.05-.41-.24-.79-.65-.84-.42-.05-.79.24-.84.65l-.14 1.1c-.01.12-.11.21-.23.21l-12.17.96-.87-7.42h4.8c.41 0 .75-.34.75-.75s-.34-.75-.75-.75h-4.98l-.11-.96c-.13-1.13-.96-2.07-2.06-2.35l-2.66-.67c-.4-.1-.81.14-.91.55-.1.4.14.81.55.91l2.66.67c.5.12.88.55.94 1.07l1.53 13c-.99.41-1.7 1.4-1.7 2.54 0 1.52 1.23 2.75 2.75 2.75s2.75-1.23 2.75-2.75c0-.45-.12-.87-.31-1.25h7.13c-.19.38-.31.8-.31 1.25 0 1.52 1.23 2.75 2.75 2.75s2.75-1.23 2.75-2.75-1.23-2.75-2.75-2.75zm-10.75 2.75c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25zm10.75 1.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm-4.03-13.28 1.97-1.97-1.97-1.97c-.29-.29-.29-.77 0-1.06s.77-.29 1.06 0l1.97 1.97 1.97-1.97c.29-.29.77-.29 1.06 0s.29.77 0 1.06l-1.97 1.97 1.97 1.97c.29.29.29.77 0 1.06-.15.15-.34.22-.53.22s-.38-.07-.53-.22l-1.97-1.97-1.97 1.97c-.15.15-.34.22-.53.22s-.38-.07-.53-.22c-.29-.29-.29-.77 0-1.06z"/></svg>
+
+            Your cart is empty
+          </h2>
+          <button class="btn-close mb-1 me-n1" type="button" data-bs-dismiss="offcanvas" data-bs-target="#cartOffcanvas" aria-label="Close"></button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="offcanvas-body">
+        <p class="mb-4">Is your shopping cart feeling a little lonely? Don't let it sit there empty and forgotten. It's time to fill it up with your favorite macarons!</p>
+        <a class="btn btn-dark rounded-pill" href="#cartOffcanvas" data-bs-dismiss="offcanvas">Start shopping</a>
+      </div>
+    </div>
+    
+
+    <!-- Page wrapper -->
+    <main class="page-wrapper">
+
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page -->
+      <header class="navbar navbar-expand-lg fixed-top " style="background-color: #d5451b;">
+        <div class="container">
+
+          <!-- Navbar brand (Logo) -->
+          <a class="navbar-brand p-0" href="index.html">
+            <span class="text-primary flex-shrink-0 me-2">
+             <img src="assets/app-icons/icon-180x180.png" alt="" width="75" height="75">
+            </span>
+          </a>
+          <!-- Account + Cart -->
+          <div class="nav align-items-center order-lg-3 ms-n1 me-3 me-sm-0">
+            <a class="nav-link fs-4 p-2 mx-sm-1 d-none d-sm-flex" href="account-signin.html" aria-label="Account">
+              <i class="ai-user"></i>
+            </a>
+            <a class="nav-link position-relative fs-4 p-2" href="#cartOffcanvas" data-bs-toggle="offcanvas" aria-label="Shopping cart">
+              <i class="ai-cart"></i>
+            </a>
+          </div>
+
+          <!-- Mobile menu toggler (Hamburger) -->
+          <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar collapse (Main navigation) -->
+          <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" aria-expanded="false">Landings</a>
+                <div class="dropdown-menu overflow-hidden p-0">
+                  <div class="d-lg-flex">
+                    <div class="mega-dropdown-column pt-1 pt-lg-3 pb-lg-4">
+                      <ul class="list-unstyled mb-0">
+                        <li>
+                          <a class="dropdown-item" href="index.html">Template Intro Page</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 rounded-3 rounded-start-0" style="background-image: url(assets/img/megamenu/landings.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-mobile-app-showcase.html">Mobile App Showcase</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/mobile-app.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-product.html">Product Landing</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/product-landing.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-saas-v1.html">SaaS v.1</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/saas-1.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-saas-v2.html">SaaS v.2</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/saas-2.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-saas-v3.html">SaaS v.3</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/saas-3.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-saas-v4.html">
+                            SaaS v.4
+                            <span class="text-danger fs-xs ms-2">New</span>
+                          </a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/saas-4.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-shop-v1.html">Shop Homepage v.1</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/shop-homepage-1.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-shop-v2.html">
+                            Shop Homepage v.2
+                            <span class="text-danger fs-xs ms-2">New</span>
+                          </a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/shop-homepage-2.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-marketing-agency.html">Marketing Agency</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/marketing-agency.jpg);"></span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mega-dropdown-column pb-2 pt-lg-3 pb-lg-4">
+                      <ul class="list-unstyled mb-0">
+                        <li>
+                          <a class="dropdown-item" href="landing-creative-agency.html">Creative Agency</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/creative-agency.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-conference.html">Conference (Event)</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/conference.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-web-studio.html">Web Studio</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/web-studio.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-corporate.html">Corporate</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/corporate.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-insurance.html">
+                            Insurance Company
+                            <span class="text-danger fs-xs ms-2">New</span>
+                          </a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/insurance.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-business-consulting.html">Business Consulting</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/business-consulting.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-coworking-space.html">Coworking Space</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/coworking.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-yoga-studio.html">Yoga Studio</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/yoga-studio.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-influencer.html">Influencer</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/influencer.jpg);"></span>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="landing-blog.html">Blog Homepage</a>
+                          <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 z-2 opacity-0" style="background-image: url(assets/img/megamenu/blog-homepage.jpg);"></span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mega-dropdown-column position-relative border-start z-3"></div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Pages</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="portfolio-list-v1.html">List View v.1</a></li>
+                      <li><a class="dropdown-item" href="portfolio-list-v2.html">List View v.2</a></li>
+                      <li><a class="dropdown-item" href="portfolio-grid-v1.html">Grid View v.1</a></li>
+                      <li><a class="dropdown-item" href="portfolio-grid-v2.html">Grid View v.2</a></li>
+                      <li><a class="dropdown-item" href="portfolio-slider.html">Slider View</a></li>
+                      <li><a class="dropdown-item" href="portfolio-single-v1.html">Single Project v.1</a></li>
+                      <li><a class="dropdown-item" href="portfolio-single-v2.html">Single Project v.2</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="shop-catalog.html">Catalog (Listing)</a></li>
+                      <li><a class="dropdown-item" href="shop-single.html">Product Page</a></li>
+                      <li><a class="dropdown-item" href="shop-checkout.html">Checkout</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="blog-grid-sidebar.html">Grid View with Sidebar</a></li>
+                      <li><a class="dropdown-item" href="blog-grid.html">Grid View no Sidebar</a></li>
+                      <li><a class="dropdown-item" href="blog-list-sidebar.html">List View with Sidebar</a></li>
+                      <li><a class="dropdown-item" href="blog-list.html">List View no Sidebar</a></li>
+                      <li><a class="dropdown-item" href="blog-single-v1.html">Single post v.1</a></li>
+                      <li><a class="dropdown-item" href="blog-single-v2.html">Single post v.2</a></li>
+                      <li><a class="dropdown-item" href="blog-single-v3.html">Single post v.3</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="about-agency.html">About - Agency</a></li>
+                      <li><a class="dropdown-item" href="about-product.html">About - Product</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="services-v1.html">Services v.1</a></li>
+                      <li><a class="dropdown-item" href="services-v2.html">Services v.2</a></li>
+                      <li><a class="dropdown-item" href="services-v3.html">Services v.3</a></li>
+                    </ul>
+                  </li>
+                  <li><a class="dropdown-item" href="pricing.html">Pricing</a></li>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Contacts</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="contacts-v1.html">Contacts v.1</a></li>
+                      <li><a class="dropdown-item" href="contacts-v2.html">Contacts v.2</a></li>
+                      <li><a class="dropdown-item" href="contacts-v3.html">Contacts v.3</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Specialty Pages</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="coming-soon-v1.html">Coming Soon v.1</a></li>
+                      <li><a class="dropdown-item" href="coming-soon-v2.html">Coming Soon v.2</a></li>
+                      <li><a class="dropdown-item" href="404-v1.html">404 Error v.1</a></li>
+                      <li><a class="dropdown-item" href="404-v2.html">404 Error v.2</a></li>
+                      <li><a class="dropdown-item" href="404-v3.html">404 Error v.3</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Account</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown">
+                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Auth pages</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="account-signin.html">Sign In</a></li>
+                      <li><a class="dropdown-item" href="account-signup.html">Sign Up</a></li>
+                      <li><a class="dropdown-item" href="account-signinup.html">Sign In / Up</a></li>
+                      <li><a class="dropdown-item" href="account-password-recovery.html">Password Recovery</a></li>
+                    </ul>
+                  </li>
+                  <li><a class="dropdown-item" href="account-overview.html">Overview</a></li>
+                  <li><a class="dropdown-item" href="account-settings.html">Settings</a></li>
+                  <li><a class="dropdown-item" href="account-billing.html">Billing</a></li>
+                  <li><a class="dropdown-item" href="account-orders.html">Orders</a></li>
+                  <li><a class="dropdown-item" href="account-earnings.html">Earnings</a></li>
+                  <li><a class="dropdown-item" href="account-chat.html">Chat (Messages)</a></li>
+                  <li><a class="dropdown-item" href="account-favorites.html">Favorites (Wishlist)</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="components/typography.html">UI Kit</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="docs/getting-started.html">Docs</a>
+              </li>
+              <li class="nav-item border-top mt-2 py-2 d-sm-none">
+                <a class="nav-link" href="account-signin.html">
+                  <i class="ai-user fs-lg me-2"></i>
+                  Sign In
+                </a>
+              </li>
+            </ul>
+            <div class="d-md-none p-3 mt-n3">
+              <a class="btn btn-primary w-100 mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">
+                <i class="ai-cart fs-xl me-2 ms-n1"></i>
+                Buy now
+              </a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+
+      <!-- Hero -->
+        <section class="position-relative mt-5 d-block d-md-none">
+        <!-- Background Image as img tag -->
+        <img src="assets/img/index-content/banner-small.jpg"
+            class="position-absolute w-100 h-100 top-0 start-0 object-fit-cover"
+            alt="Banner Background"
+            style="z-index: 1;" />
+
+        <!-- Content Layer -->
+        <div class="container position-relative z-2 text-center pt-2 pt-sm-4 pt-lg-5">
+          <h1 class="py-3 mt-3 display-3 h1-kanit" style="color: #F4E7E1;">Crave the Crunch. Love the Protein.</h1>
+          <a class="btn btn-light rounded-pill" href="#">Go to Shop</a>
+        </div>
+
+        <!-- Spacers -->
+        <div class="d-none d-lg-block" style="height: 500px;"></div>
+        <div class="d-none d-md-block d-lg-none" style="height: 260px;"></div>
+        <div class="d-md-none" style="height: 160px;"></div>
+      </section>
+
+      <section class="position-relative mt-5 d-none d-md-block">
+        <!-- Background Image as img tag -->
+        <img src="assets/img/index-content/banner.jpg"
+            class="position-absolute w-100 h-100 top-0 start-0 object-fit-cover"
+            alt="Banner Background"
+            style="z-index: 1;" />
+
+        <!-- Content Layer -->
+        <div class="container position-relative z-2 text-center pt-2 pt-sm-4 pt-lg-5">
+          <h1 class="py-3 mt-3 display-3 h1-kanit" style="color: #F4E7E1;">Crave the Crunch. Love the Protein.</h1>
+          <a class="btn btn-light rounded-pill" href="#">Go to Shop</a>
+        </div>
+
+        <!-- Spacers -->
+        <div class="d-none d-lg-block" style="height: 500px;"></div>
+        <div class="d-none d-md-block d-lg-none" style="height: 260px;"></div>
+        <div class="d-md-none" style="height: 160px;"></div>
+      </section>
+
+
+
+      <!-- New arrival (Carousel) -->
+      <section class="px-5">
+        <!-- Slider prev/next buttons -->
+        <div class="position-relative z-2 d-flex justify-content-end pt-4 pb-4 mt-2 mt-sm-3 mt-md-4 mb-n5 mb-lg-4">
+          <button class="btn btn-prev btn-icon btn-sm btn-outline-dark rounded-circle ms-3" type="button" id="new-prev" aria-label="Prev">
+            <i class="ai-arrow-left"></i>
+          </button>
+          <button class="btn btn-next btn-icon btn-sm btn-outline-dark rounded-circle ms-3" type="button" id="new-next" aria-label="Next">
+            <i class="ai-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="row">
+          <!-- Text -->
+          <div class="col-lg-3 pb-3 mb-3 mb-md-4">
+            <h2 class="h1 mt-n2 mt-lg-0 mb-2 mb-lg-4">New arrivals</h2>
+            <p class="fs-lg mb-4">Explore our new mouthwatering selection that we've recently introduced.</p>
+            <a class="btn btn-dark rounded-pill" href="#">Shop boxes</a>
+          </div>
+
+          <!-- Swiper slider -->
+          <div class="col-lg-9">
+            <div class="swiper" data-swiper-options='{
+              "slidesPerView": 1,
+              "spaceBetween": 24,
+              "autoplay": {
+                  "delay": 3000,
+                  "disableOnInteraction": false
+                },
+              "loop": true,
+              "navigation": {
+                "prevEl": "#new-prev",
+                "nextEl": "#new-next"
+              },
+              "breakpoints": {
+                "500": {
+                  "slidesPerView": 2
+                },
+                "768": {
+                  "slidesPerView": 3
+                }
+              }
+            }'>
+              <div class="swiper-wrapper">
+
+                <!-- Card 1 -->
+                <div class="swiper-slide" style="background-color: #7AADFF;">
+                  <div class="card card-flip card-hover border-0 w-sm-auto h-100 text-center">
+                    <div class="card-flip-inner mx-auto">
+                      <div class="card-flip-front p-0">
+                        <div class="card-body d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 p-0">
+                          <img src="assets/img/index-content/masala-puff.png" width="350" alt="Product 1">
+                        </div>
+                      </div>
+                      <div class="card-flip-back p-0 bg-transparent">
+                        <div class="card-body d-flex justify-content-center align-items-center h-100 p-0">
+                          <img src="assets/img/index-content/masala.png" width="350" alt="Back 1">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="swiper-slide" style="background-color: #9AF66D;">
+                  <div class="card card-flip card-hover border-0 w-sm-auto h-100 text-center">
+                    <div class="card-flip-inner mx-auto">
+                      <div class="card-flip-front p-0">
+                        <div class="card-body d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 p-0" >
+                          <img src="assets/img/index-content/cream-onion-puff.png" width="350" alt="Product 2">
+                        </div>
+                      </div>
+                      <div class="card-flip-back p-0 bg-transparent" >
+                        <div class="card-body d-flex justify-content-center align-items-center h-100 p-0" >
+                          <img src="assets/img/index-content/cream-onion.png" width="350" alt="Back 2">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="swiper-slide" style="background-color: #FE7541;">
+                  <div class="card card-flip card-hover border-0 w-sm-auto h-100 text-center">
+                    <div class="card-flip-inner mx-auto">
+                      <div class="card-flip-front p-0">
+                        <div class="card-body d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 p-0">
+                          <img src="assets/img/index-content/tomato-puff.png" width="350" alt="Product 3">
+                        </div>
+                      </div>
+                      <div class="card-flip-back p-0 bg-transparent">
+                        <div class="card-body d-flex justify-content-center align-items-center h-100 p-0">
+                          <img src="assets/img/index-content/tomato.png" width="350" alt="Back 3">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="swiper-slide" style="background-color: #FAD53E;">
+                  <div class="card card-flip card-hover border-0 w-sm-auto h-100 text-center">
+                    <div class="card-flip-inner mx-auto">
+                      <div class="card-flip-front p-0">
+                        <div class="card-body d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 p-0">
+                          <img src="assets/img/index-content/smoky-puff.png" width="350" alt="Product 4">
+                        </div>
+                      </div>
+                      <div class="card-flip-back p-0 bg-transparent">
+                        <div class="card-body d-flex justify-content-center align-items-center h-100 p-0">
+                          <img src="assets/img/index-content/smoky.png" width="350" alt="Back 4">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="swiper-slide" style="background-color: #9AF66D;">
+                  <div class="card card-flip card-hover border-0 w-sm-auto h-100 text-center">
+                    <div class="card-flip-inner mx-auto">
+                      <div class="card-flip-front p-0">
+                        <div class="card-body d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 p-0">
+                          <img src="assets/img/index-content/cheese-puff.png" width="350" alt="Product 5">
+                        </div>
+                      </div>
+                      <div class="card-flip-back p-0 bg-transparent">
+                        <div class="card-body d-flex justify-content-center align-items-center h-100 p-0">
+                          <img src="assets/img/index-content/cheese.png" width="350" alt="Back 5">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div> <!-- .swiper-wrapper -->
+            </div> <!-- .swiper -->
+          </div>
+        </div> 
+      </section>
+
+      <!-- Awards -->
+      <section class="container py-5 my-md-2 my-lg-4 my-xl-5">
+        <div class="overflow-auto" data-simplebar>
+          <div class="row row-cols-4 g-0 py-3 my-sm-3" style="min-width: 600px;">
+            <div class="col">
+              <img class="d-block mx-auto" src="assets/img/landing/shop-2/awards/01.png" width="226" alt="Award">
+            </div>
+            <div class="col">
+              <img class="d-block mx-auto" src="assets/img/landing/shop-2/awards/02.png" width="226" alt="Award">
+            </div>
+            <div class="col">
+              <img class="d-block d-dark-mode-none mx-auto" src="assets/img/landing/shop-2/awards/03-light.png" width="226" alt="Award">
+              <img class="d-none d-dark-mode-block mx-auto" src="assets/img/landing/shop-2/awards/03-dark.png" width="226" alt="Award">
+            </div>
+            <div class="col">
+              <img class="d-block mx-auto" src="assets/img/landing/shop-2/awards/04.png" width="226" alt="Award">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Custom box CTA -->
+      <section class="py-5 bg-size-cover bg-position-center" style="background-image: url(assets/img/landing/shop-2/cta-bg.jpg);">
+        <div class="container py-md-3 py-lg-5 my-xl-3 my-xxl-5">
+          <div class="row pt-2 pb-3 py-sm-4 py-md-5">
+            <div class="col-9 col-sm-8 col-md-6">
+              <h2 class="mb-0 h2-kanit" data-bs-theme="light">High Protein</h2>
+              <h2 class=" h2-kanit" data-bs-theme="light">Roasted, Never Fried</h2>
+              <h2 class=" h2-kanit mb-md-4" data-bs-theme="light">Made with Millets, Lentils & Soya</h2>
+              <p class="fs-lg text-dark opacity-70 pb-3 pb-sm-4 mb-3" data-bs-theme="light">At Good Grains, we blend wholesome ingredients with bold Indian spices to create guilt-free snacks you’ll love. Our protein puffs are crunchy, flavorful, and loaded with 10g of plant-based protein — perfect for gym-goers, snackers, and spice lovers alike.</p>
+              <a class="btn btn-dark rounded-pill" href="#" data-bs-theme="light">Create your own box</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Benefits -->
+      <section class="container py-5 my-lg-3 my-xl-4 my-xxl-5">
+        <div class="swiper pt-3 pb-2 py-sm-3 py-md-4 py-xl-5 my-lg-2" data-swiper-options='
+          {
+            "spaceBetween": 32,
+            "pagination": {
+              "el": ".swiper-pagination",
+              "clickable": true
+            },
+            "breakpoints": {
+              "460": { "slidesPerView": 2 },
+              "700": { "slidesPerView": 3 },
+              "992": { "slidesPerView": 4 }
+            }
+          }
+        '>
+          <div class="swiper-wrapper">
+            
+            <!-- Item -->
+            <div class="swiper-slide text-center">
+              <img class="d-block mx-auto mb-4" src="assets/img/landing/shop-2/benefits/glutenfree.svg" width="82" alt="Icon">
+              <h3 class="h4 pb-2 mb-1">Gluten-Free</h3>
+              <p class="fs-sm mb-0">Made without gluten, offer to savor taste and quality without limitations.</p>
+            </div>
+            
+            <!-- Item -->
+            <div class="swiper-slide text-center">
+              <img class="d-block mx-auto mb-4" src="assets/img/landing/shop-2/benefits/vegan.svg" width="82" alt="Icon">
+              <h3 class="h4 pb-2 mb-1">Vegan</h3>
+              <p class="fs-sm mb-0">Made without animal products, they're perfect for vegans.</p>
+            </div>
+            
+            <!-- Item -->
+            <div class="swiper-slide text-center">
+              <img class="d-block mx-auto mb-4" src="assets/img/landing/shop-2/benefits/natural.svg" width="82" alt="Icon">
+              <h3 class="h4 pb-2 mb-1">100% Natural</h3>
+              <p class="fs-sm mb-0">We have no place for artificial additives and preservatives.</p>
+            </div>
+            
+            <!-- Item -->
+            <div class="swiper-slide text-center">
+              <img class="d-block mx-auto mb-4" src="assets/img/landing/shop-2/benefits/love.svg" width="82" alt="Icon">
+              <h3 class="h4 pb-2 mb-1">Made with Love </h3>
+              <p class="fs-sm mb-0">Each macaron is meticulously handcrafted with a deep passion for detail and quality.</p>
+            </div>
+          </div>
+
+          <!-- Pagination (bullets) -->
+          <div class="swiper-pagination position-relative bottom-0 mt-2 pt-4 d-lg-none"></div>
+        </div>
+      </section>
+
+
+
+      <!-- Instagram -->
+      <section>
+        <h2 class="container h1 pb-2 pb-sm-3 pb-lg-4">Let's be social</h2>
+        <div class="overflow-auto" data-simplebar>
+          <div class="row row-cols-8 g-0" style="min-width: 1200px;">
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">2048</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">320</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/01.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">1764</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">283</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/02.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">4560</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">417</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/03.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">1505</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">274</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/04.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">3708</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">198</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/05.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">2925</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">409</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper"><img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/06.jpg" alt="Image"></div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">1348</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">120</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/07.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+              <a class="card-hover zoom-effect d-block position-relative" href="#">
+                <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 z-2 opacity-0">
+                  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+                  <div class="d-flex align-items-center text-light position-relative z-2">
+                    <i class="ai-heart me-1"></i>
+                    <span class="text-light fs-sm me-3">963</span>
+                    <i class="ai-message me-1"></i>
+                    <span class="text-light fs-sm">98</span>
+                  </div>
+                </div>
+                <div class="zoom-effect-wrapper">
+                  <img class="zoom-effect-img" src="assets/img/landing/shop-2/instagram/08.jpg" alt="Image">
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    
+    <!-- Footer -->
+    <footer class="footer bg-dark py-5" data-bs-theme="dark">
+      <div class="container pt-md-2 pt-lg-3 pt-xl-4">
+        <div class="row pb-5 pt-sm-2 mb-lg-2">
+          <div class="col-sm-5 col-md-4 col-xl-3 pb-2 pb-sm-0 mb-4 mb-sm-0">
+            <a class="navbar-brand py-0 mb-3 mb-md-4" href="index.html">
+              <span class="text-primary flex-shrink-0 me-2">
+                <svg version="1.1" width="35" height="32" viewBox="0 0 36 33" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="currentColor" d="M35.6,29c-1.1,3.4-5.4,4.4-7.9,1.9c-2.3-2.2-6.1-3.7-9.4-3.7c-3.1,0-7.5,1.8-10,4.1c-2.2,2-5.8,1.5-7.3-1.1c-1-1.8-1.2-4.1,0-6.2l0.6-1.1l0,0c0.6-0.7,4.4-5.2,12.5-5.7c0.5,1.8,2,3.1,3.9,3.1c2.2,0,4.1-1.9,4.1-4.2s-1.8-4.2-4.1-4.2c-2,0-3.6,1.4-4,3.3H7.7c-0.8,0-1.3-0.9-0.9-1.6l5.6-9.8c2.5-4.5,8.8-4.5,11.3,0L35.1,24C36,25.7,36.1,27.5,35.6,29z"></path>
+                </svg>
+              </span>
+              <span class="text-light opacity-90">Around</span>
+            </a>
+            <p class="text-body fs-sm pb-2 pb-md-3 mb-3">Tellus non diam morbi quam vel venenatis proin sed. Dolor elementum nunc dictum interdum amet arcu aenean eu integer</p>
+            <div class="d-flex">
+              <a class="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3" href="#" aria-label="Instagram">
+                <i class="ai-instagram"></i>
+              </a>
+              <a class="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3" href="#" aria-label="Facebook">
+                <i class="ai-facebook"></i>
+              </a>
+              <a class="btn btn-icon btn-sm btn-secondary btn-youtube rounded-circle" href="#" aria-label="YouTube">
+                <i class="ai-youtube"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-6 offset-sm-1 offset-md-2 offset-xl-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+              <div class="col mb-4 mb-md-0">
+                <ul class="nav flex-column">
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">About us</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Our boxes</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Bestsellers</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Sale</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <ul class="nav flex-column">
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Help center</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Delivery info</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Terms of service</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="#">Privacy policy</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="nav fs-sm mb-0">
+          <span class="text-body-secondary">&copy; All rights reserved. Made by</span>
+          <a class="nav-link fw-normal p-0 ms-1" href="https://createx.studio/" target="_blank" rel="noopener">Createx Studio</a>
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <a class="btn-scroll-top" href="#top" data-scroll aria-label="Scroll back to top">
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg>
+      <i class="ai-arrow-up"></i>
+    </a>
+
+
+    <!-- Vendor scripts: JS libraries and plugins -->
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/simplebar/dist/simplebar.min.js"></script>
+
+    <!-- Bootstrap + Theme scripts -->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>
