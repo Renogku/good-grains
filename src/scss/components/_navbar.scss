@@ -267,9 +267,9 @@
 // Navbar light (default)
 
 .navbar {
-  --#{$prefix}navbar-stuck-bg: var(--#{$prefix}light);
+  --#{$prefix}navbar-stuck-bg: var(--#{$prefix}secondary);
   --#{$prefix}navbar-toggler-color: #{$navbar-light-toggler-bar-color};
-  --#{$prefix}navbar-collapse-bg: var(--#{$prefix}light);
+  --#{$prefix}navbar-collapse-bg: var(--#{$prefix}secondary);
   --#{$prefix}navbar-collapse-border-color: var(--#{$prefix}border-color);
 
   transition: $navbar-transition;
