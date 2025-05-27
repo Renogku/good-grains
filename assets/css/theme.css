@@ -15303,7 +15303,7 @@ hr.dropdown-divider {
 
 .navbar {
   --ar-navbar-stuck-bg: var(--ar-secondary);
-  --ar-navbar-toggler-color: var(--ar-white);
+  --ar-navbar-toggler-color: #fff;
   --ar-navbar-collapse-bg: var(--ar-secondary);
   --ar-navbar-collapse-border-color: var(--ar-border-color);
   transition: background-color 0.1s ease-in-out;
