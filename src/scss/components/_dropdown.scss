@@ -69,10 +69,10 @@
   box-shadow: $dropdown-box-shadow;
   li:hover > .dropdown-item,
   .dropdown-item.show {
-    color: $primary;
+    color: var(--#{$prefix}dropdown-link-hover-color);
   }
   .active > .dropdown-item {
-    color: $primary;
+    color: var(--#{$prefix}dropdown-link-active-color);
   }
   .active > .dropdown-item,
   .dropdown-item.active {
